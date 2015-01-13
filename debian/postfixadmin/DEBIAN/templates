@@ -1,0 +1,30 @@
+Template: postfixadmin/reconfigure-webserver
+Type: multiselect
+Choices: apache2, apache, apache-ssl, apache-perl, lighttpd
+Description: Web server to reconfigure automatically:
+ Please choose the web server that should be automatically configured
+ to run postfixadmin.
+Description-cs.UTF-8: Automaticky přenastavit webový server:
+ Zvolte si prosím webový server, který se má automaticky nastavit ke spuštění postfixadmin.
+Description-da.UTF-8: Internetserver at rekonfigurere automatisk:
+ Vælg venligst internetserveren som automatisk skal konfigureres til at køre postfixadmin.
+Description-de.UTF-8: Webserver, der automatisch neu konfiguriert werden soll:
+ Bitte wählen Sie den Webserver, der automatisch konfiguriert werden soll, um Postfixadmin auszuführen.
+Description-es.UTF-8: Servidor web a reconfigurar automáticamente:
+ Seleccione el servidor web que deberá ser configurado automáticamente para ejecutar «postfixadmin».
+Description-fr.UTF-8: Serveur web à reconfigurer automatiquement :
+ Veuillez choisir le serveur web qui doit être configuré automatiquement pour exécuter postfixadmin.
+Description-it.UTF-8: Server web da riconfigurare automaticamente:
+ Scegliere il server web che deve essere configurato automaticamente per eseguire postfixadmin.
+Description-nl.UTF-8: Automatisch te configureren webserver:
+ Welke webserver moet automatisch worden geconfigureerd voor postfixadmin?
+Description-pl.UTF-8: Serwer WWW do automatycznej konfiguracji:
+ Proszę wybrać serwer WWW, który powinien być automatycznie skonfigurowany w celu uruchomienia postfixadmin.
+Description-pt.UTF-8: Servidor Web a reconfigurar automaticamente:
+ Por favor escolha o servidor web a ser reconfigurado para correr o postfixadmin.
+Description-ru.UTF-8: ÐÐµÐ±-ÑÐµÑÐ²ÐµÑ Ð´Ð»Ñ Ð°Ð²ÑÐ¾Ð¼Ð°ÑÐ¸ÑÐµÑÐºÐ¾Ð¹ Ð¿ÐµÑÐµÐ½Ð°ÑÑÑÐ¾Ð¹ÐºÐ¸:
+ ÐÑÐ±ÐµÑÐ¸ÑÐµ Ð²ÐµÐ±-ÑÐµÑÐ²ÐµÑ, ÐºÐ¾ÑÐ¾ÑÑÐ¹ Ð½ÑÐ¶Ð½Ð¾ Ð°Ð²ÑÐ¾Ð¼Ð°ÑÐ¸ÑÐµÑÐºÐ¸ Ð½Ð°ÑÑÑÐ¾Ð¸ÑÑ Ð´Ð»Ñ Ð·Ð°Ð¿ÑÑÐºÐ° dpostfixadmin.
+Description-sv.UTF-8: Webbservrar som ska ställas in automatiskt:
+ Välj webbservrar som automatiskt ska ställas in för att köra postfixadmin.
+Description-zh_TW.UTF-8: 網頁伺服器將自動重新設定：
+ 請選擇要自動執行 postfixadmin 的網頁伺服器
