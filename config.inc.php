@@ -22,12 +22,12 @@
  * Doing this implies you have changed this file as required.
  * i.e. configuring database etc; specifying setup.php password etc.
  */
-$CONF['configured'] = false;
+$CONF['configured'] = true;
 
 // In order to setup Postfixadmin, you MUST specify a hashed password here.
 // To create the hash, visit setup.php in a browser and type a password into the field,
 // on submission it will be echoed out to you as a hashed value.
-$CONF['setup_password'] = 'changeme';
+$CONF['setup_password'] = '3f914b0e2ed63298bca2ec896545302d:b112ba227954b4a0f5c737ba33914057dbc90fce';
 
 // Language config
 // Language files are located in './languages', change as required..
@@ -80,11 +80,19 @@ function language_hook($PALANG, $language) {
 // mysql = MySQL 3.23 and 4.0, 4.1 or 5
 // mysqli = MySQL 4.1+ 
 // pgsql = PostgreSQL
+/*
 $CONF['database_type'] = 'mysqli';
 $CONF['database_host'] = 'localhost';
 $CONF['database_user'] = 'postfix';
-$CONF['database_password'] = 'postfixadmin';
+$CONF['database_password'] = 'postfix';
 $CONF['database_name'] = 'postfix';
+*/
+// Ldap support
+$CONF['database_type'] = 'ldap';
+$CONF['database_host'] = 'localhost';
+$CONF['database_user'] = 'cn=admin,dc=example,dc=com';
+$CONF['database_password'] = 'postfix';
+$CONF['database_name'] = 'dc=example,dc=com';
 // If you need to specify a different port for a MYSQL database connection, use e.g.
 //   $CONF['database_host'] = '172.30.33.66:3308';
 // If you need to specify a different port for POSTGRESQL database connection
@@ -132,7 +140,8 @@ $CONF['smtp_port'] = '25';
 // authlib = support for courier-authlib style passwords
 // dovecot:CRYPT-METHOD = use dovecotpw -s 'CRYPT-METHOD'. Example: dovecot:CRAM-MD5
 //   (WARNING: don't use dovecot:* methods that include the username in the hash - you won't be able to login to PostfixAdmin in this case)
-$CONF['encrypt'] = 'md5crypt';
+#$CONF['encrypt'] = 'md5crypt';
+$CONF['encrypt'] = 'cleartext';
 
 // In what flavor should courier-authlib style passwords be encrypted?
 // md5 = {md5} + base64 encoded md5 hash
