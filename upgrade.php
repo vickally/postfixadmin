@@ -190,7 +190,8 @@ function _do_upgrade($current_version) {
 function db_query_parsed($sql, $ignore_errors = 0, $attach_mysql = "") {
     global $CONF;
 
-    if ($CONF['database_type'] == 'mysql' || $CONF['database_type'] == 'mysqli' ) {
+	#change by Vick Ally for ldap
+    if ($CONF['database_type'] == 'mysql' || $CONF['database_type'] == 'mysqli' || $CONF['database_type'] == 'ldap' ) {
 
         $replace = array(
                 '{AUTOINCREMENT}'   => 'int(11) not null auto_increment', 
@@ -210,6 +211,7 @@ function db_query_parsed($sql, $ignore_errors = 0, $attach_mysql = "") {
                 '{DATECURRENT}'     => 'timestamp NOT NULL default CURRENT_TIMESTAMP', # only allowed once per table in MySQL
         );
         $sql = "$sql $attach_mysql";
+
 
     } elseif($CONF['database_type'] == 'pgsql') {
         $replace = array(
@@ -233,7 +235,6 @@ function db_query_parsed($sql, $ignore_errors = 0, $attach_mysql = "") {
                 '{DATE}'            => "timestamp with time zone default '2000-01-01'", # stay in sync with MySQL
                 '{DATECURRENT}'     => 'timestamp with time zone default now()',
         );
-
     } else {
         echo "Sorry, unsupported database type " . $conf['database_type'];
         exit;

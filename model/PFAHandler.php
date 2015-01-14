@@ -561,18 +561,26 @@ abstract class PFAHandler {
      * @return boolean true on successful login (i.e. password matches etc)
      */
     public function login($username, $password) {
+	##add by Vick Ally
+	global $CONF;
         $username = escape_string($username);
 
         $table = table_by_key($this->db_table);
         $active = db_get_boolean(True);
         $query = "SELECT password FROM $table WHERE " . $this->id_field . "='$username' AND active='$active'";
-
         $result = db_query ($query);
+
         if ($result['rows'] == 1) {
             $row = db_array ($result['result']);
+		#by Vick Ally for ldap
+		 if ($CONF['database_type'] == "ldap"){
+	                $row['password']= $row[0]['userpassword'][0];
+		}
+		
             $crypt_password = pacrypt ($password, $row['password']);
 
             if($row['password'] == $crypt_password) {
+		print "hello";
                 return true;
             }
         }

@@ -51,6 +51,7 @@ $f_session_start = function_exists ("session_start");
 $f_preg_match = function_exists ("preg_match");
 $f_mb_encode_mimeheader = function_exists ("mb_encode_mimeheader");
 $f_imap_open = function_exists ("imap_open");
+$f_ldap_connect = function_exists ("ldap_connect");
 
 $file_config = file_exists (realpath ("./config.inc.php"));
 
@@ -271,6 +272,7 @@ else
     $error =+ 1;
 }
 
+/*
 //
 // Multibyte functions
 //
@@ -289,6 +291,7 @@ else
 //
 // Imap functions
 //
+/*
 if ( $f_imap_open == 1)
 {
     print "<li>Depends on: IMAP functions - OK</li>\n";
@@ -300,7 +303,7 @@ else
     print "Without IMAP support, you won't be able to create subfolders when creating mailboxes.</li>\n";
     #   $error =+ 1;
 }
-
+*/
 
 
 
