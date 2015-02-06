@@ -14,7 +14,7 @@
  * File: functions.inc.php
  * Contains re-usable code.
  */
-##aded by Vick Ally for ldap
+##aded by Vicky for ldap
 	 require_once "./ldap.php";
 
 $version = '2.92';
@@ -291,7 +291,7 @@ function escape_string ($string) {
         if ($CONF['database_type'] == "mysqli") {
             $escaped_string = mysqli_real_escape_string($link, $string);
         }
-	##aded by Vick Ally for ldap
+	##aded by Vicky for ldap
         if ($CONF['database_type'] == "ldap") {
             $escaped_string = $string;
         }
@@ -610,7 +610,7 @@ function list_domains_for_admin ($username) {
     $result = db_query ($query);
     if ($result['rows'] > 0) {
         $i = 0;
-	#by Vick Ally for ldap
+	#by Vicky for ldap
 	if ($CONF['database_type'] == "ldap"){
 		$db_array_result = db_array($result['result']);
 		for($i=0;$i<$db_array_result['count'];$i++){
@@ -642,7 +642,7 @@ function list_domains () {
     $result = db_query ("SELECT domain FROM $table_domain WHERE domain!='ALL' ORDER BY domain");
     if ($result['rows'] > 0) {
         $i = 0;
-	#by Vick Ally for ldap
+	#by Vicky for ldap
 	if ($CONF['database_type'] == "ldap"){
 		$db_array_result = db_array($result['result']);
 		for($i=0;$i<$db_array_result['count'];$i++){
@@ -1281,7 +1281,7 @@ function db_connect ($ignore_errors = 0) {
             $error_text .= "<p />DEBUG INFORMATION:<br />PostgreSQL functions not available! (php5-pgsql installed?)<br />database_type = 'pgsql' in config.inc.php, are you using a different database? $DEBUG_TEXT";
         }
 	
-	     ##added by Vick Ally for ldap support==>
+	     ##added by Vicky for ldap support==>
    	} elseif ($CONF['database_type'] == "ldap") {
         if (function_exists ("ldap_connect")){
                         if(!isset($CONF['database_port'])) {
@@ -1337,7 +1337,7 @@ function db_get_boolean($bool) {
             return 1;  
         } 
         return 0;
-	## by Vick Ally for ldap
+	## by Vicky for ldap
     } elseif(Config::Read('database_type') == 'ldap') {
         if($bool) {
             return TRUE;  
@@ -1367,7 +1367,6 @@ function db_pgsql() {
 // Optional parameter: $ignore_errors = TRUE, used by upgrade.php
 //
 function db_query ($query, $ignore_errors = 0) {
-	print $query;
     global $CONF;
     global $DEBUG_TEXT;
     $result = "";
@@ -1387,12 +1386,9 @@ function db_query ($query, $ignore_errors = 0) {
         $result = @pg_query ($link, $query) 
             or $error_text = "Invalid query: " . pg_last_error();
     }
-    ###added by Vick Ally for ldap
-    if ($CONF['database_type'] == "ldap") {
-	 $result = ldap_query ($query, $link);
-        } else {
-	 $error_text = "Invalid query: " . ldap_error($link);
-	}
+	##aded by vicky
+    if ($CONF['database_type'] == "ldap") $result = ldap_query ($query, $link) 
+        or $error_text = "Invalid query: " . ldap_error($link);
 	##over
     if ($error_text != "" && $ignore_errors == 0) {
         error_log($error_text);
@@ -1406,7 +1402,7 @@ function db_query ($query, $ignore_errors = 0) {
             if ($CONF['database_type'] == "mysql") $number_rows = mysql_num_rows ($result);
             if ($CONF['database_type'] == "mysqli") $number_rows = mysqli_num_rows ($result);
             if (db_pgsql()                        ) $number_rows = pg_num_rows ($result);
-		#added by Vick Ally 
+		#added by Vicky 
             if ($CONF['database_type'] == "ldap") $number_rows =  ldap_count_entries ($link, $result);
         } else {
             // if $query was something else, UPDATE, DELETE or INSERT check the number of rows with
@@ -1414,8 +1410,8 @@ function db_query ($query, $ignore_errors = 0) {
             if ($CONF['database_type'] == "mysql") $number_rows = mysql_affected_rows ($link);
             if ($CONF['database_type'] == "mysqli") $number_rows = mysqli_affected_rows ($link);
             if (db_pgsql()                        ) $number_rows = pg_affected_rows ($result);
-		#added by Vick Ally 
-            if ($CONF['database_type'] == "ldap") $number_rows =  ldap_count_entries ($link, $result);
+		#added by Vicky 
+            if ($CONF['database_type'] == "ldap") $number_rows =  ldap_effected_rows ($result);
         }
     }
 
@@ -1454,7 +1450,7 @@ function db_array ($result) {
     if ($CONF['database_type'] == "mysql") $row = mysql_fetch_array ($result);
     if ($CONF['database_type'] == "mysqli") $row = mysqli_fetch_array ($result);
     if (db_pgsql()                        ) $row = pg_fetch_array ($result);
-	#by Vick Ally for ldap
+	#by Vicky for ldap
     if ($CONF['database_type'] == "ldap") $row = ldap_fetch_array($result);
     return $row;
 }

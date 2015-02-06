@@ -222,6 +222,17 @@ if ($f_pg_connect == 1)
 }
 
 //
+// Openldap functions
+//
+if ($f_ldap_connect == 1)
+{
+    print "<li>Depends on: OpenLdap - OK \n";
+    if ( !($config_loaded && $CONF['database_type'] == 'ldap') ) {
+        print "<br>(change the database_type to 'ldap' in config.inc.php if you want to use OpenLdap)\n";
+    }
+    print "</li>";
+}
+//
 // Database connection
 //
 if ($config_loaded) {
@@ -318,7 +329,11 @@ if ($error != 0)
 else
 {
     print "<p>Everything seems fine... attempting to create/update database structure</p>\n";
-    require_once($incpath.'/upgrade.php');
+	if ($CONF['database_type'] == 'ldap'){
+	    require_once($incpath.'/ldap_upgrade.php');
+	} else {	
+	    require_once($incpath.'/upgrade.php');
+	}
 
     $tUsername = '';
     $setupMessage = '';
@@ -369,7 +384,6 @@ else
             }
         }
     } 
-
     if ( ($setuppw == "" || $setuppw == "changeme" || safeget("lostpw") == 1 || $lostpw_error != 0) /* && $_SERVER['REQUEST_METHOD'] != "POST" */ ) {
 # show "create setup password" form
     ?>

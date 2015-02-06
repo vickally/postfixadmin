@@ -190,7 +190,7 @@ function _do_upgrade($current_version) {
 function db_query_parsed($sql, $ignore_errors = 0, $attach_mysql = "") {
     global $CONF;
 
-	#change by Vick Ally for ldap
+	#change by Vicky for ldap
     if ($CONF['database_type'] == 'mysql' || $CONF['database_type'] == 'mysqli' || $CONF['database_type'] == 'ldap' ) {
 
         $replace = array(
